@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Editar Artigo</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Editar Artigo</h1>
+		<br />
+		<form action="#" th:action="@{/save}" th:object="${artigo}"	method="POST">
+
+			<table border="0" cellpadding="10">
+				<tr>				
+					<td>Artigo ID:</td>
+					<td>
+						<input type="text" th:field="*{id}" readonly="readonly" />
+					</td>
+				</tr>			
+				<tr>				
+					<td>Titulo:</td>
+					<td>
+						<input type="text" th:field="*{titulo}" />
+					</td>
+				</tr>
+				<tr>
+					<td>Resumo:</td>
+					<td><input type="text" th:field="*{resumo}" /></td>
+				</tr>
+
+				<tr>
+					<td>Publicado:</td>
+					<td><input type="checkbox" th:field="*{publicado}" /></td>
+				</tr>								
+				<tr>
+					<td colspan="2"><button type="submit">Salvar</button> </td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<br/>
+	<button><a href="/secauth/">Voltar</a></button>
+</body>
+</html>

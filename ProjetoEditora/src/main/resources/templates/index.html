@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<title>Artigos</title>
+</head>
+<body>
+<div align="center">
+    <div>
+        <h1 class="title">SecAuth - OAuth2 Spring Security Cognito Login</h1>
+        <div sec:authorize="isAuthenticated()">
+            <div class="box">
+                Hello, <strong th:text="${#authentication.principal.email}"></strong>
+            </div>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            <form method="POST" action="#" th:action="@{/logout}" >
+                <input type="submit" class="btn btn-danger" value="Logout"/>
+            </form>
+        </div>
+        <div sec:authorize="isAnonymous()">
+            <div class="box">
+                <a class="button login is-primary"
+                   th:href="@{/oauth2/authorization/cognito}">Fazer Login</a>
+            </div>
+        </div>
+    </div>
+    <!--<a href="/secauth/oauth2/authorization/cognito">Login</a>
+    <h2 th:if="${a != null}"><a href="">Logout</a></h2>
+    <h1>Lista de Artigos</h1>
+    <a href="/secauth/new">Criar</a>-->
+    <br/><br/>
+    <table border="1" cellpadding="10" th:if="${login != null}">
+        <thead>
+            <tr>
+                <th>Artigo ID</th>
+                <th>Titulo</th>
+                <th>Resumo</th>
+                <th>Publicado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="artigo : ${listArtigos}">
+            	<td th:text="${artigo.id}">artigo ID</td>
+                <td th:text="${artigo.titulo}">Titulo</td>
+                <td th:text="${artigo.resumo}">Resumo</td>
+                <td th:if="${artigo.publicado == true}" >Sim</td>
+                <td th:if="${artigo.publicado == false}" >Não</td>
+                <td>
+                	<a th:href="@{'/edit/' + ${artigo.id}}">Editar</a>
+                	&nbsp;&nbsp;&nbsp;
+                	<a th:href="@{'/delete/' + ${artigo.id}}">Deletar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="1" cellpadding="10" th:if="${login == null}">
+        <thead>
+        <tr>
+            <th>Artigo ID</th>
+            <th>Titulo</th>
+            <th>Resumo</th>
+            <th>Publicado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="artigo : ${listArtigos}">
+            <td th:text="${artigo.id}">artigo ID</td>
+            <td th:text="${artigo.titulo}">Titulo</td>
+            <td th:text="${artigo.resumo}">Resumo</td>
+            <td th:if="${artigo.publicado == true}" >Sim</td>
+            <td th:if="${artigo.publicado == false}" >Não</td>
+            <!--<td>
+                <a th:href="@{'/edit/' + ${artigo.id}}">Editar</a>
+                &nbsp;&nbsp;&nbsp;
+                <a th:href="@{'/delete/' + ${artigo.id}}">Deletar</a>
+            </td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>    
+</body>
+</html>
