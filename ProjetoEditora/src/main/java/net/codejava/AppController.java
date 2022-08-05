@@ -15,6 +15,7 @@ public class AppController {
 	@Autowired
 	private ArtigoService service;
 	
+	/*Rota principal mostrando todos os Artigos já criados*/
 	@RequestMapping("/")
 	public String index(Model model, Authentication a) {
 		model.addAttribute("login", a);
@@ -29,6 +30,7 @@ public class AppController {
 		}
 	}
 	
+	/*Rota para criação de um novo artigo*/
 	@RequestMapping("/new")
 	public String showNewProductPage(Model model, Authentication a) {
 		Artigo artigo = new Artigo();
@@ -37,6 +39,7 @@ public class AppController {
 		return "new_artigo";
 	}
 	
+	/*Rota de redirecinamento para salvar um NOVO arquivo ou um arquivo ATUALIZADO*/
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String saveProduct(@ModelAttribute("artigo") Artigo artigo) {
 		service.save(artigo);
@@ -44,6 +47,8 @@ public class AppController {
 		return "redirect:/";
 	}
 	
+	
+	/*Rota de edição de um determinado artigo*/
 	@RequestMapping(value = "/edit/{id}")
 	public ModelAndView showEditProductPage(@PathVariable(name = "id") int id, Authentication a) {
 		ModelAndView mav = new ModelAndView("edit_artigo");
@@ -52,17 +57,10 @@ public class AppController {
 		return mav;
 	}
 	
+	/*Rota para deletar um determinado artigo*/
 	@RequestMapping("/delete/{id}")
 	public String deleteProduct(@PathVariable(name = "id") int id, Authentication a) {
 		service.delete(id);
 		return "redirect:/";		
 	}
-
-	/*@RequestMapping("/")
-	public String index(Authentication a){
-		if (a != null) {
-			return "login";
-		}
-		return "redirect:oauth2/authorization/cognito";
-	}*/
 }
