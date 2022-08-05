@@ -1,2 +1,10 @@
 # Trab2-Editora_Cognito
-Projeto editora com cognito aws
+Projeto de Desenvolvimento Web: **Editora com cognito AWS.**
+
+Alunos:
+
+  ### Pedro Henrique Psybyloski;
+  
+  ### Lucas Correa dos Santos;
+  
+  ### Ricardo Rodrigues Pedroso Junior
